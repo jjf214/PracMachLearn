@@ -1,0 +1,16 @@
+{
+    "contents" : "require(caret)\n\nset.seed(3433)\ndata(AlzheimerDisease)\nadData = data.frame(diagnosis,predictors)\ninTrain = createDataPartition(adData$diagnosis, p = 3/4)[[1]]\ntraining = adData[ inTrain,]\ntesting = adData[-inTrain,]\n\nnames(training)[(substr(names(training),start = 1,stop = 2) == \"IL\")]->idx\ntraining2=training[ ,c(idx,\"diagnosis\")]\ntesting2=testing[ ,c(idx,\"diagnosis\")]\n\npreProc.pca = preProcess(training2[ ,idx],method=\"pca\", thresh = 0.8)\ntrainPC.pca = predict(preProc.pca, training2[ ,idx])\nmodelFit.pca = train(training2$diagnosis~.,method=\"glm\",data=trainPC.pca)\ntestPC.pca = predict(preProc.pca,testing2[ ,idx])\nconfusionMatrix(testing2$diagnosis,predict(modelFit.pca,testPC.pca))",
+    "created" : 1405688462574.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2190295523",
+    "id" : "12F0FC40",
+    "lastKnownWriteTime" : 1405705781,
+    "path" : "~/MBA/R project (non Twitter)/PracMachLearn/ScratchFile.R",
+    "project_path" : "ScratchFile.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

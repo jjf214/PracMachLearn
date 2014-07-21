@@ -1,0 +1,17 @@
+{
+    "contents" : "'%!in%' <- function(x,y)!('%in%'(x,y))\nis.blank <-function(x) (x == \"\")\n\ntraining = read.delim(file = \"pml-training.csv\",sep=\",\")\nattach(training)\ntraining = training[ ,colnames(training) %!in% c(\"X\",\n                                                 \"raw_timestamp_part_1\",\n                                                 \"raw_timestamp_part_2\",\n                                                 \"cvtd_timestamp\",\n                                                 \"new_window\",\n                                                 \"num_window\")]\n\nkeep1=names(training)[(colSums(is.na(training)/nrow(training))<.1)]\ntraining=training[ ,keep1]\n\nkeep2=names(training)[(colSums(is.blank(training)/nrow(training))<.1)]\ntraining=training[, keep2]\n\nfeaturePlot(x=training[, c(\"classe\",\"roll_belt\",\"pitch_belt\",\"yaw_belt\")],\n            y=training[,\"classe\"])",
+    "created" : 1405952980922.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2882878054",
+    "id" : "51B8F8F6",
+    "lastKnownWriteTime" : 1405957498,
+    "path" : "~/MBA/R project (non Twitter)/PracMachLearn/Scraps_Project.R",
+    "project_path" : "Scraps_Project.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
