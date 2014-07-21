@@ -1,3 +1,6 @@
+setwd("/Users/fenstjj1/MBA/R project (non Twitter)/PracMachLearn/")
+
+require(caret)
 '%!in%' <- function(x,y)!('%in%'(x,y))
 is.blank <-function(x) (x == "")
 
@@ -16,5 +19,5 @@ training=training[ ,keep1]
 keep2=names(training)[(colSums(is.blank(training)/nrow(training))<.1)]
 training=training[, keep2]
 
-featurePlot(x=training[, c("classe","roll_belt","pitch_belt","yaw_belt")],
-            y=training[,"classe"])
+featurePlot(x=training[, c("roll_belt","pitch_belt","yaw_belt")],
+            y=training[,"classe"],plot="pairs")
